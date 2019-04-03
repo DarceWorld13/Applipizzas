@@ -47,21 +47,70 @@ public class TestJDBC implements PizzaDao {
 		return itemsArray;
 	}
 
-	@Override
+	
 	public void saveNewPizza(Pizza pizza) {
-		// TODO Auto-generated method stub
-
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			String jdbcUrl = "jdbc:mysql://localhost:3306/pizzeria";
+			Connection uneConnexion = DriverManager.getConnection(jdbcUrl, "root", "");
+			Statement statem = uneConnexion.createStatement();
+			
+		 int results = statem.executeUpdate("INSERT INTO toutes_les_pizzas(code, libelle, prix, categorie)  VALUES ('"+
+					pizza.getCode() +"','"+ pizza.getLibelle()+"',"+ pizza.getPrix() + ",'"+pizza.getCategorie() +"');" );
+			
+			
+					System.out.println(results + " pizza inséré");
+			
+		} catch (ClassNotFoundException e) {
+			throw new DataAccessException("Problème de chargement du pilote", e);
+		} catch (SQLException e) {
+			throw new DataAccessException("Problème lors de la communication avec la base de données", e);
+		}
+		
 	}
+	
 
 	@Override
 	public void updatePizza(String codePizza, Pizza pizza) {
-		// TODO Auto-generated method stub
-
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			String jdbcUrl = "jdbc:mysql://localhost:3306/pizzeria";
+			Connection uneConnexion = DriverManager.getConnection(jdbcUrl, "root", "");
+			Statement statem = uneConnexion.createStatement();
+			
+			int results = statem.executeUpdate("UPDATE  toutes_les_pizzas SET code = '"+pizza.getCode() +"',libelle='"+ pizza.getLibelle()+"',prix ="+ pizza.getPrix() + ",categorie='"+pizza.getCategorie() +"' WHERE code =  '"+pizza.getCode()+"'");
+			
+		 		
+					System.out.println(results + " pizza inséré");
+			
+		} catch (ClassNotFoundException e) {
+			throw new DataAccessException("Problème de chargement du pilote", e);
+		} catch (SQLException e) {
+			throw new DataAccessException("Problème lors de la communication avec la base de données", e);
+		}
 	}
 
 	@Override
 	public void deletePizza(String codePizza) {
-		// TODO Auto-generated method stub
+	
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			String jdbcUrl = "jdbc:mysql://localhost:3306/pizzeria";
+			Connection uneConnexion = DriverManager.getConnection(jdbcUrl, "root", "");
+			Statement statem = uneConnexion.createStatement();
+			
+			int results = statem.executeUpdate("DELETE    FROM toutes_les_pizzas WHERE code = '"+codePizza+"'");
+			
+		 		
+					System.out.println(results + " pizza inséré");
+			
+		} catch (ClassNotFoundException e) {
+			throw new DataAccessException("Problème de chargement du pilote", e);
+		} catch (SQLException e) {
+			throw new DataAccessException("Problème lors de la communication avec la base de données", e);
+		}
+		
+		
 
 	}
 
