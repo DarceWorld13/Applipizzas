@@ -67,7 +67,7 @@ public class PizzeriaAdminConsoleApp {
 					
 					suppr.executeUC(question, dao);
 				} catch (Exception e) {
-					// TODO Auto-generated catch block
+					
 					System.err.println(e.getMessage());
 				}
 				break;
@@ -80,11 +80,6 @@ public class PizzeriaAdminConsoleApp {
 
 			}
 		}
-		
-
-		//Pour test
-		
-		///
 
 	}
 
