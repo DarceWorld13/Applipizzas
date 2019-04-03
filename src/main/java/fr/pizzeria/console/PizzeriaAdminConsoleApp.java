@@ -19,37 +19,33 @@ public class PizzeriaAdminConsoleApp {
 
 	public static void main(String args[]) {
 
-		// instancié en créant une nouvelle pizza
-
+		// instancier pour trouver nos pizzas
 		TestJDBC dao = new TestJDBC();
-
-		
 		Scanner question = new Scanner(System.in);
 
+		// ici on affiche les choix
 		int reponse = 0;
 		while (reponse != 99) {
-
 			try {
-				
 				System.out.println("1.liste des pizzas");
 				System.out.println("2.Ajouter une nouvelle pizza");
 				System.out.println("3. Mettre à jour une pizza");
 				System.out.println("4. Supprimer une pizza");
 				System.out.println("99. Sortir");
-
-
 				System.out.println("veuillez saisir votre choix s'il vous plait ");
-
+				// on récupère le choix de l'utilisateur
 				reponse = Integer.parseInt(question.nextLine());
-
 				switch (reponse) {
 				case 1:
+					// lister toutes les pizzas
 					ListerPizzasService liste = new ListerPizzasService();
 					liste.executeUC(question, dao);
 
 					break;
 				case 2:
+					// ici on choisit d'ajouter une nouvelle pizza
 					AjouterPizzaService service = new AjouterPizzaService();
+					// ici on gère l'exception
 					try {
 						service.executeUC(question, dao);
 					} catch (SavePizzaException e) {
